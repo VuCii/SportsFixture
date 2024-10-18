@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Sports Hub - Netball</title>
+    <title>University Sports Hub - Soccer</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     
@@ -20,7 +25,7 @@
                 
                 <li><a href="Soccer.html">Soccer</a></li>
                 <li><a href="netball.html">Netball</a></li>
-                <li><a href="rugby.html" class="active">Netball</a></li>
+                <li><a href="rugby.html" class="active">Rugby</a></li>
                 <li><a href="cricket.html">Cricket</a></li>
                 <li>
                     <a href="Index.html" onclick="logout()" style="background-color: #ff4757; color: white; border: none; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s;">
@@ -40,7 +45,7 @@
                 <li><a href="#match-details">Match Details</a></li>
                 <li><a href="Soccer.html">Soccer</a></li>
                 <li><a href="netball.html">Netball</a></li>
-                <li><a href="rugby.html" class="active">Netball</a></li>
+                <li><a href="rugby.html" class="active">Rugby</a></li>
                 <li><a href="cricket.html">Cricket</a></li>
                 <li><a href="javascript:void(0);" onclick="document.getElementById('admin-modal').style.display='block';">Admin</a></li>
             </div>
@@ -85,7 +90,7 @@
    
 
     <section id="live-scores">
-        <p>Netball</p>
+        <p>Soccer</p>
         <h2>Live Scores</h2>
         <div id="live-score-container">
             <!-- Live scores will be dynamically inserted here -->
@@ -169,7 +174,7 @@
                     const date = document.getElementById('search-date').value;
                     const location = document.getElementById('search-location').value.toLowerCase();
                     
-                    const historicalMatches = JSON.parse(localStorage.getItem('netballHistoricalMatches')) || [];
+                    const historicalMatches = JSON.parse(localStorage.getItem('soccerHistoricalMatches')) || [];
                     const filteredMatches = historicalMatches.filter(match => {
                         return (!teamName || match.team1.toLowerCase().includes(teamName) || match.team2.toLowerCase().includes(teamName)) &&
                                (!date || match.date === date) &&
@@ -196,7 +201,7 @@
             <button id="clear-history-button" class="btn btn-danger" style="margin-bottom: 15px;" onclick="clearHistory()">Clear History</button>
             <script>
                 function clearHistory() {
-                    localStorage.removeItem('netballHistoricalMatches');
+                    localStorage.removeItem('soccerHistoricalMatches');
                     document.getElementById('historical-matches-container').innerHTML = ''; // Clear displayed matches
                     alert('History cleared successfully!');
                 }
@@ -207,13 +212,14 @@
 </div>
 
 <button id="view-historical-matches-button">View Historical Matches</button>
-<div class="netball-match-container" style="padding: 20px; background-color: #e9f5ff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-    <h2 style="text-align: center; color: #007bff; margin-bottom: 20px;">Upcoming Matches</h2>
+<h2 style="text-align: center; color: #007bff; margin-bottom: 20px;">Upcoming Matches</h2>
+<div class="soccer-match-container" style="padding: 20px; background-color: #e9f5ff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+   
     <div class="slideshow-container" style="position: relative; max-width: 1050px; margin: auto;">
         <div class="match-slide fade">
             <div class="match-card" style="border: 2px solid #007bff; border-radius: 8px; padding: 15px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%;">
                 <h3 style="color: #007bff; text-align: center;">Match 1</h3>
-                <p><strong>Teams:</strong> Falcons vs Hawks</p>
+                <p><strong>Teams:</strong> Rhinos vs Warriors</p>
                 <p><strong>Date:</strong> 2024-09-01</p>
                 <p><strong>Time:</strong> 15:00</p>
                 <p><strong>Venue:</strong> Steve Biko Field</p>
@@ -224,7 +230,7 @@
         <div class="match-slide fade">
             <div class="match-card" style="border: 2px solid #007bff; border-radius: 8px; padding: 15px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%;">
                 <h3 style="color: #007bff; text-align: center;">Match 2</h3>
-                <p><strong>Teams:</strong> Owls vs Eagles</p>
+                <p><strong>Teams:</strong> Vikings vs Eagles</p>
                 <p><strong>Date:</strong> 2024-09-02</p>
                 <p><strong>Time:</strong> 17:00</p>
                 <p><strong>Venue:</strong> Carries Fountain Stadium</p>
@@ -235,7 +241,7 @@
         <div class="match-slide fade">
             <div class="match-card" style="border: 2px solid #007bff; border-radius: 8px; padding: 15px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%;">
                 <h3 style="color: #007bff; text-align: center;">Match 3</h3>
-                <p><strong>Teams:</strong> Sparrows vs Swans</p>
+                <p><strong>Teams:</strong> Panthers vs Tigers</p>
                 <p><strong>Date:</strong> 2024-09-03</p>
                 <p><strong>Time:</strong> 16:00</p>
                 <p><strong>Venue:</strong> Sports Center</p>
@@ -310,52 +316,51 @@ function showSlides(n) {
     background-color: #717171;
 }
 </style>
-<section id="netball-points-table">
+<section id="soccer-points-table">
     <h2 style="text-align: center; color: #007bff;">Points Table</h2>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); border-radius: 10px; overflow: hidden;">
-        <thead style="background-color: #007bff; color: white;">
-            <tr>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Team</th>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Matches Played</th>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Wins</th>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Draws</th>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Losses</th>
-                <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Points</th>
-            </tr>
-        </thead>
-        <tbody id="netball-points-tbody" style="background-color: #f9f9f9;">
-            <!-- Dynamic content will be inserted here -->
-        </tbody>
-    </table>
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); border-radius: 10px; overflow: hidden;">
+            <thead style="background-color: #007bff; color: white;">
+                <tr>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Team</th>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Matches Played</th>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Wins</th>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Draws</th>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Losses</th>
+                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 1.1em;">Points</th>
+                </tr>
+            </thead>
+            <tbody id="soccer-points-tbody" style="background-color: #f9f9f9;">
+                <!-- Dynamic content will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+            font-size: 1.5em; /* Increased font size */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            table, td, th {
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
 </section>
 
-<style>
-    table, td, th {
-        border: 1px solid black;
-        font-size: 1.5em; /* Increased font size */
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        max-width: 100%; /* Ensure table is responsive */
-        overflow-x: auto; /* Allow horizontal scrolling on small screens */
-    }
-
-    th {
-        text-align: left;
-    }
-
-    @media (max-width: 768px) {
-        table, td, th {
-            font-size: 1em; /* Decrease font size on smaller screens */
-        }
-    }
-</style>
-
-<section id="netball-teams">
+<section id="soccer-teams">
     <h2>Teams</h2>
-    <div class="netball-team-container" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div class="soccer-team-container" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
         <div class="team-card" style="border-radius: 8px; padding: 15px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px; width: 250px; transition: transform 0.2s; position: relative; overflow: hidden;">
             <img src="path/to/rhinos-image.jpg" alt="Rhinos" style="width: 100%; height: auto; display: block;">
             <h3 style="color: #007bff; text-align: center;">Rhinos</h3>
@@ -496,7 +501,7 @@ function showSlides(n) {
             <i class="fab fa-linkedin" style="font-size: 30px; color: #0077b5;"></i>
         </a>
     </div>
-    <p style="font-size: 1.1em;">Engage with the rugby community by sharing your thoughts on matches, participating in discussions, and connecting with fellow fans. Join our forums to dive deeper into the game!</p>
+    <p style="font-size: 1.1em;">Engage with the soccer community by sharing your thoughts on matches, participating in discussions, and connecting with fellow fans. Join our forums to dive deeper into the game!</p>
    
     <div id="comment-section" style="margin-top: 20px;">
         <h3 style="color: #000000;">Comments</h3>
@@ -548,16 +553,24 @@ function showSlides(n) {
             <label for="team1-select">Team 1:</label>
             <select id="team1-select" required>
                 <option value="">Select Team 1</option>
-                <option value="Falcons">Falcons</option>
-                <option value="Hawks">Hawks</option>
-                <option value="Owls">Owls</option>
-                <option value="Eagles">Eagles</option>
-                <option value="Sparrows">Sparrows</option>
-                <option value="Swans">Swans</option>
-                <option value="Lions">Lions</option>
-                <option value="Sharks">Sharks</option>
-                <option value="Bulls">Bulls</option>
-                <option value="Cheetahs">Cheetahs</option>
+                <option value="Anchor House">Anchor House</option>
+                <option value="Astra House">Astra House</option>
+                <option value="505 Penting Property">505 Penting Property</option>
+                <option value="Carol Rose">Carol Rose</option>
+                <option value="Henwood">Henwood</option>
+                <option value="Classy 556">Classy 556</option>
+                <option value="BoomBox">BoomBox</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Masamo Trading">Masamo Trading</option>
+                <option value="Alcindor Trading">Alcindor Trading</option>
+                <option value="Atlantis">Atlantis</option>
+                <option value="Megalo">Megalo</option>
+                <option value="Orap">Orap</option>
+                <option value="Hlelo Pickering">Hlelo Pickering</option>
+                <option value="Ocean Diamond Anton">Ocean Diamond Anton</option>
+                <option value="Triton House">Triton House</option>
+                <option value="Sihambasodwa">Sihambasodwa</option>
+                <option value="Wills Court">Wills Court</option>
             </select>
             <label for="team1-score">Team 1 Score:</label>
             <input type="number" id="team1-score" min="0" placeholder="Enter Team 1 Score">
@@ -566,16 +579,24 @@ function showSlides(n) {
             <label for="team2-select">Team 2:</label>
             <select id="team2-select" required>
                 <option value="">Select Team 2</option>
-                <option value="Falcons">Falcons</option>
-                <option value="Hawks">Hawks</option>
-                <option value="Owls">Owls</option>
-                <option value="Eagles">Eagles</option>
-                <option value="Sparrows">Sparrows</option>
-                <option value="Swans">Swans</option>
-                <option value="Lions">Lions</option>
-                <option value="Sharks">Sharks</option>
-                <option value="Bulls">Bulls</option>
-                <option value="Cheetahs">Cheetahs</option>
+                <option value="Anchor House">Anchor House</option>
+                <option value="Astra House">Astra House</option>
+                <option value="505 Penting Property">505 Penting Property</option>
+                <option value="Carol Rose">Carol Rose</option>
+                <option value="Henwood">Henwood</option>
+                <option value="Classy 556">Classy 556</option>
+                <option value="BoomBox">BoomBox</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Masamo Trading">Masamo Trading</option>
+                <option value="Alcindor Trading">Alcindor Trading</option>
+                <option value="Atlantis">Atlantis</option>
+                <option value="Megalo">Megalo</option>
+                <option value="Orap">Orap</option>
+                <option value="Hlelo Pickering">Hlelo Pickering</option>
+                <option value="Ocean Diamond Anton">Ocean Diamond Anton</option>
+                <option value="Triton House">Triton House</option>
+                <option value="Sihambasodwa">Sihambasodwa</option>
+                <option value="Wills Court">Wills Court</option>
             </select>
             <label for="team2-score">Team 2 Score:</label>
             <input type="number" id="team2-score" min="0" placeholder="Enter Team 2 Score">
@@ -605,60 +626,60 @@ function showSlides(n) {
     <form id="result-form">
         <div class="form-row">
             <div class="form-group">
-                <label for="netball-team1">Team 1:</label>
-                <select id="netball-team1" required></select>
+                <label for="soccer-team1">Team 1:</label>
+                <select id="soccer-team1" required></select>
             </div>
             <div class="form-group">
-                <label for="netball-team1-score">Team 1 Score:</label>
-                <input type="number" id="netball-team1-score" min="0" required>
+                <label for="soccer-team1-score">Team 1 Score:</label>
+                <input type="number" id="soccer-team1-score" min="0" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label for="netball-team2">Team 2:</label>
-                <select id="netball-team2" required></select>
+                <label for="soccer-team2">Team 2:</label>
+                <select id="soccer-team2" required></select>
             </div>
             <div class="form-group">
-                <label for="netball-team2-score">Team 2 Score:</label>
-                <input type="number" id="netball-team2-score" min="0" required>
+                <label for="soccer-team2-score">Team 2 Score:</label>
+                <input type="number" id="soccer-team2-score" min="0" required>
             </div>
         </div>
         <div class="button-group">
-            <button type="button" id="netball-update-button" class="btn btn-primary">Update Points</button>
-            <button type="button" id="netball-reset-button" class="btn btn-secondary">Reset to Zero</button>
+            <button type="button" id="soccer-update-button" class="btn btn-primary">Update Points</button>
+            <button type="button" id="soccer-reset-button" class="btn btn-secondary">Reset to Zero</button>
         </div>
     </form>
 </section>
 
-<section id="netball-match-details" class="admin-section" style="display: none;">
+<section id="soccer-match-details" class="admin-section" style="display: none;">
     <h2>Update Upcoming Matches</h2>
     <div>
-        <label for="netball-match-selector">Select Match:</label>
-        <select id="netball-match-selector"></select>
+        <label for="soccer-match-selector">Select Match:</label>
+        <select id="soccer-match-selector"></select>
     </div>
     <div>
-        <label for="netball-kickoff-date">Kickoff Date:</label>
-        <input type="date" id="netball-kickoff-date">
+        <label for="soccer-kickoff-date">Kickoff Date:</label>
+        <input type="date" id="soccer-kickoff-date">
         
-        <label for="netball-kickoff-time">Kickoff Time:</label>
-        <input type="time" id="netball-kickoff-time">
+        <label for="soccer-kickoff-time">Kickoff Time:</label>
+        <input type="time" id="soccer-kickoff-time">
         
-        <label for="netball-venue">Venue:</label>
-        <select id="netball-venue">
+        <label for="soccer-venue">Venue:</label>
+        <select id="soccer-venue">
             <option value="Steve Biko Field">Steve Biko Field</option>
             <option value="Carries Fountain Stadium">Carries Fountain Stadium</option>
             <option value="Sports Center">Sports Center</option>
             <option value="UWC Stadium">UWC Stadium</option>
         </select>
         
-        <label for="netball-match-type">Match Type:</label>
-        <select id="netball-match-type">
+        <label for="soccer-match-type">Match Type:</label>
+        <select id="soccer-match-type">
             <option value="League">League</option>
             <option value="Friendly">Friendly</option>
             <option value="Indoors">Indoors</option>
         </select>
         
-        <button type="button" id="netball-update-match-button" class="btn btn-primary">Update Match Details</button>
+        <button type="button" id="soccer-update-match-button" class="btn btn-primary">Update Match Details</button>
     </div>
     
 </section>
@@ -1041,7 +1062,7 @@ function showSlides(n) {
         // Assuming login is successful
         document.getElementById('live-scores-update').style.display = 'block';
         document.getElementById('update-points').style.display = 'block';
-        document.getElementById('netball-match-details').style.display = 'block';
+        document.getElementById('soccer-match-details').style.display = 'block';
         document.getElementById('team-management').style.display = 'block';
         document.getElementById('player-management').style.display = 'block';
     });
@@ -1059,7 +1080,7 @@ function showSlides(n) {
     });
 
     function renderHistoricalMatches() {
-        const historicalMatches = JSON.parse(localStorage.getItem('netballHistoricalMatches')) || [];
+        const historicalMatches = JSON.parse(localStorage.getItem('soccerHistoricalMatches')) || [];
         const container = document.getElementById('live-score-container');
         container.innerHTML = ''; // Clear existing content
         historicalMatches.forEach(match => {
@@ -1124,7 +1145,7 @@ function showSlides(n) {
             };
 
             // Save the live score data to local storage
-            localStorage.setItem('netballLiveScore', JSON.stringify(liveScoreData));
+            localStorage.setItem('soccerLiveScore', JSON.stringify(liveScoreData));
 
             // Add to historical matches if the match is finished
             if (matchStatus === 'Full Time') {
@@ -1145,9 +1166,9 @@ function showSlides(n) {
             venue: matchData.matchLocation
         };
 
-        let historicalMatches = JSON.parse(localStorage.getItem('netballHistoricalMatches')) || [];
+        let historicalMatches = JSON.parse(localStorage.getItem('soccerHistoricalMatches')) || [];
         historicalMatches.push(historicalMatch);
-        localStorage.setItem('netballHistoricalMatches', JSON.stringify(historicalMatches));
+        localStorage.setItem('soccerHistoricalMatches', JSON.stringify(historicalMatches));
     }
 
     function renderLiveScore(data) {
@@ -1174,7 +1195,7 @@ function showSlides(n) {
 
     // Call this function when the page loads to display any saved live score
     function loadSavedLiveScore() {
-        const savedLiveScore = localStorage.getItem('netballLiveScore');
+        const savedLiveScore = localStorage.getItem('soccerLiveScore');
         if (savedLiveScore) {
             const liveScoreData = JSON.parse(savedLiveScore);
             renderLiveScore(liveScoreData);
@@ -1191,32 +1212,46 @@ function showSlides(n) {
 
   
     <script>
-        let netballTeams = {
-            "Falcons": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Hawks": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Owls": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Eagles": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Sparrows": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Swans": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Lions": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Sharks": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Bulls": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
-            "Cheetahs": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 }
+        let soccerTeams = {
+            "Anchor House": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Astra House": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "505 Penting Property": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Carol Rose": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Henwood": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Classy 556": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "BoomBox": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Emerald": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Masamo Trading": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Alcindor Trading": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Atlantis": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Megalo": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Orap": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Hlelo Pickering": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Ocean Diamond Anton": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Triton House": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Sihambasodwa": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
+            "Wills Court": { played: 0, wins: 0, draws: 0, losses: 0, points: 0 },
         };
 
-        const matches = [
-            { id: 1, team1: "Falcons", team2: "Hawks", date: "2024-09-01", time: "15:00", venue: "Steve Biko Field", type: "League" },
-            { id: 2, team1: "Owls", team2: "Eagles", date: "2024-09-02", time: "17:00", venue: "Carries Fountain Stadium", type: "League" },
-            { id: 3, team1: "Sparrows", team2: "Swans", date: "2024-09-03", time: "16:00", venue: "Sports Center", type: "League" },
-            { id: 4, team1: "Lions", team2: "Sharks", date: "2024-09-04", time: "18:00", venue: "UWC Stadium", type: "League" },
-            { id: 5, team1: "Bulls", team2: "Cheetahs", date: "2024-09-05", time: "19:00", venue: "Steve Biko Field", type: "League" },
-        ];
 
-        function populateTeamOptions() {
-            const teamSelects = document.querySelectorAll('#netball-team1, #netball-team2');
+            const soccerMatches = [
+                { id: 1, team1: "Anchor House", team2: "Astra House", date: "2024-09-01", time: "15:00", venue: "Steve Biko Field", type: "League" },
+                { id: 2, team1: "505 Penting Property", team2: "Carol Rose", date: "2024-09-02", time: "17:00", venue: "Carries Fountain Stadium", type: "League" },
+                { id: 3, team1: "Henwood", team2: "Classy 556", date: "2024-09-03", time: "16:00", venue: "Sports Center", type: "League" },
+                { id: 4, team1: "BoomBox", team2: "Emerald", date: "2024-09-04", time: "18:00", venue: "UWC Stadium", type: "League" },
+                { id: 5, team1: "Masamo Trading", team2: "Alcindor Trading", date: "2024-09-05", time: "19:00", venue: "Steve Biko Field", type: "League" },
+                { id: 6, team1: "Atlantis", team2: "Megalo", date: "2024-09-06", time: "20:00", venue: "Steve Biko Field", type: "League" },
+                { id: 7, team1: "Orap", team2: "Hlelo Pickering", date: "2024-09-07", time: "15:00", venue: "Carries Fountain Stadium", type: "League" },
+                { id: 8, team1: "Ocean Diamond Anton", team2: "Triton House", date: "2024-09-08", time: "17:00", venue: "Sports Center", type: "League" },
+                { id: 9, team1: "Sihambasodwa", team2: "Wills Court", date: "2024-09-09", time: "16:00", venue: "UWC Stadium", type: "League" },
+            ];
+       
+
+        function populateSoccerTeamOptions() {
+            const teamSelects = document.querySelectorAll('#soccer-team1, #soccer-team2');
             teamSelects.forEach(select => {
                 select.innerHTML = '';
-                for (const team in netballTeams) {
+                for (const team in soccerTeams) {
                     const option = document.createElement('option');
                     option.value = team;
                     option.textContent = team;
@@ -1224,12 +1259,28 @@ function showSlides(n) {
                 }
             });
         }
-        
+        function renderSoccerPointsTable() {
+    const pointsTableBody = document.getElementById('soccer-points-tbody');
+    pointsTableBody.innerHTML = ''; // Clear existing rows
 
-        function populateMatchSelector() {
-            const matchSelector = document.getElementById('netball-match-selector');
+    for (const team in soccerTeams) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${team}</td>
+            <td>${soccerTeams[team].played}</td>
+            <td>${soccerTeams[team].wins}</td>
+            <td>${soccerTeams[team].draws}</td>
+            <td>${soccerTeams[team].losses}</td>
+            <td>${soccerTeams[team].points}</td>
+        `;
+        pointsTableBody.appendChild(row);
+    }
+}
+
+        function populateSoccerMatchSelector() {
+            const matchSelector = document.getElementById('soccer-match-selector');
             matchSelector.innerHTML = '';
-            matches.forEach(match => {
+            soccerMatches.forEach(match => {
                 const option = document.createElement('option');
                 option.value = match.id;
                 option.textContent = `${match.team1} vs. ${match.team2} on ${match.date}`;
@@ -1237,10 +1288,10 @@ function showSlides(n) {
             });
         }
 
-        function renderMatchDetails() {
-            const matchContainer = document.querySelector('.netball-match-container');
+        function renderSoccerMatchDetails() {
+            const matchContainer = document.querySelector('.soccer-match-container');
             matchContainer.innerHTML = '';
-            matches.forEach(match => {
+            soccerMatches.forEach(match => {
                 const matchCard = document.createElement('div');
                 matchCard.classList.add('match-card');
                 matchCard.innerHTML = `
@@ -1254,106 +1305,106 @@ function showSlides(n) {
             });
         }
 
-        function saveTeamsToLocalStorage() {
-            localStorage.setItem('netballTeams', JSON.stringify(netballTeams));
+        function saveSoccerTeamsToLocalStorage() {
+            localStorage.setItem('soccerTeams', JSON.stringify(soccerTeams));
         }
 
-        function loadTeamsFromLocalStorage() {
-            const savedTeams = localStorage.getItem('netballTeams');
+        function loadSoccerTeamsFromLocalStorage() {
+            const savedTeams = localStorage.getItem('soccerTeams');
             if (savedTeams) {
                 return JSON.parse(savedTeams);
             }
             return null;
         }
 
-        function updatePoints() {
-            const team1 = document.getElementById('netball-team1').value;
-            const team2 = document.getElementById('netball-team2').value;
-            const team1Score = parseInt(document.getElementById('netball-team1-score').value);
-            const team2Score = parseInt(document.getElementById('netball-team2-score').value);
+        function updateSoccerPoints() {
+            const team1 = document.getElementById('soccer-team1').value;
+            const team2 = document.getElementById('soccer-team2').value;
+            const team1Score = parseInt(document.getElementById('soccer-team1-score').value);
+            const team2Score = parseInt(document.getElementById('soccer-team2-score').value);
 
             if (team1 !== team2) {
-                netballTeams[team1].played += 1;
-                netballTeams[team2].played += 1;
+                soccerTeams[team1].played += 1;
+                soccerTeams[team2].played += 1;
 
                 if (team1Score > team2Score) {
-                    netballTeams[team1].wins += 1;
-                    netballTeams[team2].losses += 1;
-                    netballTeams[team1].points += 3;
+                    soccerTeams[team1].wins += 1;
+                    soccerTeams[team2].losses += 1;
+                    soccerTeams[team1].points += 3;
                 } else if (team1Score < team2Score) {
-                    netballTeams[team2].wins += 1;
-                    netballTeams[team1].losses += 1;
-                    netballTeams[team2].points += 3;
+                    soccerTeams[team2].wins += 1;
+                    soccerTeams[team1].losses += 1;
+                    soccerTeams[team2].points += 3;
                 } else {
-                    netballTeams[team1].draws += 1;
-                    netballTeams[team2].draws += 1;
-                    netballTeams[team1].points += 1;
-                    netballTeams[team2].points += 1;
+                    soccerTeams[team1].draws += 1;
+                    soccerTeams[team2].draws += 1;
+                    soccerTeams[team1].points += 1;
+                    soccerTeams[team2].points += 1;
                 }
 
-                saveTeamsToLocalStorage(); // Save after updating
-                renderPointsTable();
+                saveSoccerTeamsToLocalStorage(); // Save after updating
+                renderSoccerPointsTable();
             }
         }
 
-        function renderPointsTable() {
-            const pointsTableBody = document.getElementById('netball-points-tbody');
-            pointsTableBody.innerHTML = ''; // Clear existing content
+        function renderSoccerPointsTable() {
+            const pointsTableBody = document.getElementById('soccer-points-tbody');
+            pointsTableBody.innerHTML = ''; // Clear existing rows
 
-            for (const team in netballTeams) {
+            for (const team in soccerTeams) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${team}</td>
-                    <td>${netballTeams[team].played}</td>
-                    <td>${netballTeams[team].wins}</td>
-                    <td>${netballTeams[team].draws}</td>
-                    <td>${netballTeams[team].losses}</td>
-                    <td>${netballTeams[team].points}</td>
+                    <td>${soccerTeams[team].played}</td>
+                    <td>${soccerTeams[team].wins}</td>
+                    <td>${soccerTeams[team].draws}</td>
+                    <td>${soccerTeams[team].losses}</td>
+                    <td>${soccerTeams[team].points}</td>
                 `;
                 pointsTableBody.appendChild(row);
             }
         }
 
-        function resetPoints() {
-            for (const team in netballTeams) {
-                netballTeams[team].played = 0;
-                netballTeams[team].wins = 0;
-                netballTeams[team].draws = 0;
-                netballTeams[team].losses = 0;
-                netballTeams[team].points = 0;
+        function resetSoccerPoints() {
+            for (const team in soccerTeams) {
+                soccerTeams[team].played = 0;
+                soccerTeams[team].wins = 0;
+                soccerTeams[team].draws = 0;
+                soccerTeams[team].losses = 0;
+                soccerTeams[team].points = 0;
             }
-            saveTeamsToLocalStorage(); // Save after resetting
-            renderPointsTable();
+            saveSoccerTeamsToLocalStorage(); // Save after resetting
+            renderSoccerPointsTable();
         }
 
-        function initializeTeams() {
-            const savedTeams = loadTeamsFromLocalStorage();
+        function initializeSoccerTeams() {
+            const savedTeams = loadSoccerTeamsFromLocalStorage();
             if (savedTeams) {
-                netballTeams = savedTeams;
+                soccerTeams = savedTeams;
             }
-            renderPointsTable();
+            renderSoccerPointsTable();
         }
 
-        function updateMatchDetails() {
-            const matchId = document.getElementById('netball-match-selector').value;
-            const match = matches.find(m => m.id == matchId);
+        function updateSoccerMatchDetails() {
+            const matchId = document.getElementById('soccer-match-selector').value;
+            const match = soccerMatches.find(m => m.id == matchId);
             if (match) {
-                match.date = document.getElementById('netball-kickoff-date').value;
-                match.time = document.getElementById('netball-kickoff-time').value;
-                match.venue = document.getElementById('netball-venue').value;
-                match.type = document.getElementById('netball-match-type').value;
-                renderMatchDetails();
+                match.date = document.getElementById('soccer-kickoff-date').value;
+                match.time = document.getElementById('soccer-kickoff-time').value;
+                match.venue = document.getElementById('soccer-venue').value;
+                match.type = document.getElementById('soccer-match-type').value;
+                renderSoccerMatchDetails();
             }
         }
 
-        function showMatchDetails() {
-            const matchId = document.getElementById('netball-match-selector').value;
-            const match = matches.find(m => m.id == matchId);
+        function showSoccerMatchDetails() {
+            const matchId = document.getElementById('soccer-match-selector').value;
+            const match = soccerMatches.find(m => m.id == matchId);
             if (match) {
-                document.getElementById('netball-kickoff-date').value = match.date;
-                document.getElementById('netball-kickoff-time').value = match.time;
-                document.getElementById('netball-venue').value = match.venue;
-                document.getElementById('netball-match-type').value = match.type;
+                document.getElementById('soccer-kickoff-date').value = match.date;
+                document.getElementById('soccer-kickoff-time').value = match.time;
+                document.getElementById('soccer-venue').value = match.venue;
+                document.getElementById('soccer-match-type').value = match.type;
             }
         }
 
@@ -1421,18 +1472,18 @@ function showSlides(n) {
             }
         }
 
-        document.getElementById('netball-update-button').addEventListener('click', updatePoints);
-        document.getElementById('netball-reset-button').addEventListener('click', resetPoints);
-        document.getElementById('netball-update-match-button').addEventListener('click', updateMatchDetails);
+        document.getElementById('soccer-update-button').addEventListener('click', updateSoccerPoints);
+        document.getElementById('soccer-reset-button').addEventListener('click', resetSoccerPoints);
+        document.getElementById('soccer-update-match-button').addEventListener('click', updateSoccerMatchDetails);
         document.getElementById('update-live-scores-button').addEventListener('click', updateLiveScores);
-        document.getElementById('netball-match-selector').addEventListener('change', showMatchDetails);
+        document.getElementById('soccer-match-selector').addEventListener('change', showSoccerMatchDetails);
 
-        populateTeamOptions();
-        populateMatchSelector();
-        renderPointsTable();
-        renderMatchDetails();
+        populateSoccerTeamOptions();
+        populateSoccerMatchSelector();
+        renderSoccerPointsTable();
+        renderSoccerMatchDetails();
         updateLiveScores();
-        initializeTeams();
+        initializeSoccerTeams();
     </script>
 </body>
 </html>
@@ -1550,7 +1601,7 @@ function showSlides(n) {
     }
 
     #live-scores {
-        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+        background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
         color: white;
         padding: 30px;
         border-radius: 15px;
@@ -1958,5 +2009,9 @@ function showSlides(n) {
 
     #view-historical-matches-button:hover {
         background-color: #45a049;
+    }
+
+    html {
+        scroll-behavior: smooth;
     }
 </style>
