@@ -97,52 +97,7 @@
         </div>
        
     </section>
-<!-- Start Generation Here -->
-<section id="live-game-videos" style="margin-top: 20px;">
-    <h2 style="text-align: center; color: #007bff;">Live Game Videos</h2>
-    <div id="video-container" style="display: flex; flex-wrap: wrap; justify-content: center;">
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Match Highlights</h4>
-                <p>Exciting moments from the latest match!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Player Interviews</h4>
-                <p>Hear from the players after the game!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video3.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Coaching Insights</h4>
-                <p>Expert analysis from the coaching staff!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video4.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Behind the Scenes</h4>
-                <p>A look at the preparations before the match!</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- End Generation Here -->
 
 <div id="historical-matches-modal" class="modal">
@@ -686,6 +641,32 @@ function showSlides(n) {
 <section id="team-management" class="admin-section" style="display: none;">
      <h2>Update Player Information</h2>
     <form id="player-update-form" style="margin-top: 20px;">
+        <div class="form-row" style="display: flex; justify-content: space-between; margin-bottom: 15px;"></div>
+            <div class="form-group" style="flex: 1; margin-right: 10px;">
+                <label for="team2-select">Choose Team</label>
+        <select id="team2-select" required>
+            <option value="">Select Team 2</option>
+            <option value="Anchor House">Anchor House</option>
+            <option value="Astra House">Astra House</option>
+            <option value="505 Penting Property">505 Penting Property</option>
+            <option value="Carol Rose">Carol Rose</option>
+            <option value="Henwood">Henwood</option>
+            <option value="Classy 556">Classy 556</option>
+            <option value="BoomBox">BoomBox</option>
+            <option value="Emerald">Emerald</option>
+            <option value="Masamo Trading">Masamo Trading</option>
+            <option value="Alcindor Trading">Alcindor Trading</option>
+            <option value="Atlantis">Atlantis</option>
+            <option value="Megalo">Megalo</option>
+            <option value="Orap">Orap</option>
+            <option value="Hlelo Pickering">Hlelo Pickering</option>
+            <option value="Ocean Diamond Anton">Ocean Diamond Anton</option>
+            <option value="Triton House">Triton House</option>
+            <option value="Sihambasodwa">Sihambasodwa</option>
+            <option value="Wills Court">Wills Court</option>
+        </select>
+            </div>
+       
         <div class="form-row" style="display: flex; justify-content: space-between; margin-bottom: 15px;">
             <div class="form-group" style="flex: 1; margin-right: 10px;">
                 <label for="player-name">Player Name:</label>
@@ -725,16 +706,18 @@ function showSlides(n) {
                 <label for="player-position">Position:</label>
                 <select id="player-position" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
                     <option value="" disabled selected>Select Position</option>
+                    <option value="Goalkeeper">Goalkeeper</option>
+                    <option value="Defender">Defender</option>
+                    <option value="Midfielder">Midfielder</option>
                     <option value="Forward">Forward</option>
-                    <option value="Back">Back</option>
-                    <option value="Hooker">Hooker</option>
-                    <option value="Prop">Prop</option>
-                    <option value="Lock">Lock</option>
-                    <option value="Flanker">Flanker</option>
+                    <option value="Striker">Striker</option>
+                    <option value="Winger">Winger</option>
                     <option value="Fullback">Fullback</option>
-                    <option value="Wing">Wing</option>
+                    <option value="Center Back">Center Back</option>
+                    <option value="Attacking Midfielder">Attacking Midfielder</option>
                 </select>
             </div>
+            
         </div>
         <div class="button-group" style="margin-top: 10px;">
             <button type="button" id="update-player-button" class="btn btn-primary" style="padding: 10px 15px; border: none; border-radius: 4px; background-color: #007bff; color: white; cursor: pointer;">Update Player</button>
@@ -859,14 +842,14 @@ function showSlides(n) {
                     <tr>
                         <th style="border: 1px solid #ddd; padding: 8px;">Player Name</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">Address</th>
-                         <th style="border: 1px solid #ddd; padding: 8px;">ID Number</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Age</th>
+                         <th style="border: 1px solid #ddd; padding: 8px;">Age</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">Position</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Phone Number</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Jersey Number</th>
-                     <th style="border: 1px solid #ddd; padding: 8px;">ID Number</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Phone No</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Jersey Number </th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">ID No</th>
+              
+                     <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="players-list">
@@ -882,11 +865,11 @@ function showSlides(n) {
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.name}</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.address}</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.age}</td>
-                      <td style="border: 1px solid #ddd; padding: 8px;">${player.idNumber}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.position}</td>
+                      <td style="border: 1px solid #ddd; padding: 8px;">${player.position}</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.email}</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.phone}</td>
                     <td style="border: 1px solid #ddd; padding: 8px;">${player.jerseyNumber}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">${player.idNumber}</td>
                   
                     <td style="border: 1px solid #ddd; padding: 8px;">
                         <button onclick="editPlayer('${player.name}')" style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;" title="Edit Player">Edit</button>
@@ -1283,7 +1266,7 @@ function showSlides(n) {
             soccerMatches.forEach(match => {
                 const option = document.createElement('option');
                 option.value = match.id;
-                option.textContent = `${match.team1} vs. ${match.team2} on ${match.date}`;
+                option.textContent = `${match.team1} vs. ${match.team2}`;
                 matchSelector.appendChild(option);
             });
         }
