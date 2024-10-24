@@ -92,53 +92,6 @@
         </div>
        
     </section>
-<!-- Start Generation Here -->
-<section id="live-game-videos" style="margin-top: 20px;">
-    <h2 style="text-align: center; color: #007bff;">Live Game Videos</h2>
-    <div id="video-container" style="display: flex; flex-wrap: wrap; justify-content: center;">
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Match Highlights</h4>
-                <p>Exciting moments from the latest match!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Player Interviews</h4>
-                <p>Hear from the players after the game!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video3.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Coaching Insights</h4>
-                <p>Expert analysis from the coaching staff!</p>
-            </div>
-        </div>
-        <div class="video-card" style="margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 300px;">
-            <video controls style="width: 100%;">
-                <source src="path/to/live-game-video4.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-description" style="padding: 10px;">
-                <h4>Behind the Scenes</h4>
-                <p>A look at the preparations before the match!</p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Generation Here -->
 
 <div id="historical-matches-modal" class="modal">
     <div class="modal-content">
@@ -705,14 +658,14 @@ function showSlides(n) {
                 <label for="player-position">Position:</label>
                 <select id="player-position" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
                     <option value="" disabled selected>Select Position</option>
-                    <option value="Forward">Forward</option>
-                    <option value="Back">Back</option>
-                    <option value="Hooker">Hooker</option>
-                    <option value="Prop">Prop</option>
-                    <option value="Lock">Lock</option>
-                    <option value="Flanker">Flanker</option>
-                    <option value="Fullback">Fullback</option>
-                    <option value="Wing">Wing</option>
+                    <option value="Goal Shooter (GS)">Goal Shooter (GS)</option>
+                    <option value="Goal Attack (GA)">Goal Attack (GA)</option>
+                    <option value="Wing Attack (WA)">Wing Attack (WA)</option>
+                    <option value="Center (C)">Center (C)</option>
+                    <option value="Wing Defense (WD)">Wing Defense (WD)</option>
+                    <option value="Goal Defense (GD)">Goal Defense (GD)</option>
+                    <option value="Goal Keeper (GK)">Goal Keeper (GK)</option>
+                    
                 </select>
             </div>
         </div>
@@ -887,6 +840,34 @@ function showSlides(n) {
             document.getElementById('player-jersey-number').value = '';
             document.getElementById('player-id-number').value = '';
         }
+        // Validation function
+function validatePlayerForm(name, address, age, position, email, phone) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/;
+
+    if (!name || !address || !age || !position) {
+        alert('Please fill in all the required fields.');
+        return false;
+    }
+
+    if (isNaN(age) || age < 10 || age > 40) {
+        alert('Please enter a valid age (between 10 and 100).');
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid phone number (10 digits).');
+        return false;
+    }
+
+    return true;
+}
+
 
         function editPlayer(playerName) {
             const player = players.find(p => p.name === playerName);
@@ -948,6 +929,43 @@ function showSlides(n) {
             alert('Team not found.');
         }
     });
+    function validatePlayerForm(name, address, age, position, email, phone,idNumber) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/;
+    const idPattern = /^\d{13}$/; // Exactly 13 numeric digits for ID number
+    
+    
+
+    if (!name || !address || !age || !position || !idNumber) {
+        alert('Please fill in all the required fields.');
+        return false;
+    }
+
+    if (isNaN(age) || age < 10 || age > 40) {
+        alert('Please enter a valid age (between 10 and 40 yeas).');
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid phone number (10 digits).');
+        return false;
+    }
+
+    return true;
+    // Validate ID number format (13 digits)
+    if (!idPattern.test(idNumber)) {
+        alert('Please enter a valid ID number (13 digits).');
+        return false;
+    }
+
+    return true; // All validations passed
+}
+
 
     function updateTeamList() {
         const teamsContainer = document.getElementById('teams-container');
@@ -1233,7 +1251,7 @@ function showSlides(n) {
             matches.forEach(match => {
                 const option = document.createElement('option');
                 option.value = match.id;
-                option.textContent = `${match.team1} vs. ${match.team2} on ${match.date}`;
+                option.textContent = `${match.team1} vs. ${match.team2} }`;
                 matchSelector.appendChild(option);
             });
         }

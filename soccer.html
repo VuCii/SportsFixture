@@ -834,7 +834,7 @@ function showSlides(n) {
             playersContainer.innerHTML = '';
 
             const table = document.createElement('table');
-            table.style.width = '100%';
+            table.style.width = '80%';
             table.style.borderCollapse = 'collapse';
             table.style.fontSize = '0.9em'; // Set font size to be smaller
             table.innerHTML = `
@@ -890,6 +890,33 @@ function showSlides(n) {
             document.getElementById('player-jersey-number').value = '';
             document.getElementById('player-id-number').value = '';
         }
+// Validation function
+function validatePlayerForm(name, address, age, position, email, phone) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/;
+
+    if (!name || !address || !age || !position) {
+        alert('Please fill in all the required fields.');
+        return false;
+    }
+
+    if (isNaN(age) || age < 10 || age > 40) {
+        alert('Please enter a valid age (between 10 and 100).');
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid phone number (10 digits).');
+        return false;
+    }
+
+    return true;
+}
 
         function editPlayer(playerName) {
             const player = players.find(p => p.name === playerName);

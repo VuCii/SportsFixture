@@ -767,119 +767,156 @@ function showSlides(n) {
     <script>
         const players = [];
 
-        document.getElementById('update-player-button').addEventListener('click', function() {
-            const playerName = document.getElementById('player-name').value;
-            const playerAddress = document.getElementById('player-address').value;
-            const playerIdNumber = document.getElementById('player-id-number').value;
-            const playerAge = document.getElementById('player-age').value;
-            const playerPosition = document.getElementById('player-position').value;
-            const playerEmail = document.getElementById('player-email').value;
-            const playerPhone = document.getElementById('player-phone').value;
-            const playerJerseyNumber = document.getElementById('player-jersey-number').value;
-           
+document.getElementById('update-player-button').addEventListener('click', function() {
+    const playerName = document.getElementById('player-name').value.trim();
+    const playerAddress = document.getElementById('player-address').value.trim();
+    const playerIdNumber = document.getElementById('player-id-number').value.trim();
+    const playerAge = document.getElementById('player-age').value.trim();
+    const playerPosition = document.getElementById('player-position').value.trim();
+    const playerEmail = document.getElementById('player-email').value.trim();
+    const playerPhone = document.getElementById('player-phone').value.trim();
+    const playerJerseyNumber = document.getElementById('player-jersey-number').value.trim();
 
-            if (playerName && playerAddress && playerAge && playerPosition) {
-                const player = {
-                    name: playerName,
-                    address: playerAddress,
-                    age: playerAge,
-                    position: playerPosition,
-                    email: playerEmail,
-                    phone: playerPhone,
-                    jerseyNumber: playerJerseyNumber,
-                    idNumber: playerIdNumber
-                };
-                players.push(player);
-                updatePlayerList();
-                clearPlayerForm();
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
+    // Run the validation function before proceeding
+    if (!validatePlayerForm(playerName, playerAddress, playerAge, playerPosition, playerEmail, playerPhone,playerIdNumber)) {
+        return; // Stop if validation fails
+    }
 
-        function updatePlayerList() {
-            const playersContainer = document.getElementById('players-container');
-            playersContainer.innerHTML = '';
+    const player = {
+        name: playerName,
+        address: playerAddress,
+        age: playerAge,
+        position: playerPosition,
+        email: playerEmail,
+        phone: playerPhone,
+        jerseyNumber: playerJerseyNumber,
+        idNumber: playerIdNumber
+    };
+    players.push(player);
+    updatePlayerList();
+    clearPlayerForm();
+});
 
-            const table = document.createElement('table');
-            table.style.width = '100%';
-            table.style.borderCollapse = 'collapse';
-            table.style.fontSize = '0.9em'; // Set font size to be smaller
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Player Name</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Address</th>
-                         <th style="border: 1px solid #ddd; padding: 8px;">Age</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Position</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Phone</th>
-                     
-                        <th style="border: 1px solid #ddd; padding: 8px;">Jersey No</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">ID Number</th>
-                     <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="players-list">
-                </tbody>
-            `;
-            playersContainer.appendChild(table);
+// Validation function
+function validatePlayerForm(name, address, age, position, email, phone,idNumber) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/;
+    const idPattern = /^\d{13}$/; // Exactly 13 numeric digits for ID number
+    
+    
 
-            const playersList = document.getElementById('players-list');
-            playersList.innerHTML = ''; // Clear existing rows before adding new ones
-            players.forEach(player => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.name}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.address}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.age}</td>
-                      <td style="border: 1px solid #ddd; padding: 8px;">${player.position}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.email}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.phone}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.jerseyNumber}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${player.idNumber}</td>
-                  
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <button onclick="editPlayer('${player.name}')" style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;" title="Edit Player">Edit</button>
-                        <button onclick="removePlayer('${player.name}')" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;" title="Remove Player">Remove</button>
-                    </td>
-                `;
-                playersList.appendChild(row);
-            });
-        }
+    if (!name || !address || !age || !position || !idNumber) {
+        alert('Please fill in all the required fields.');
+        return false;
+    }
 
-        function clearPlayerForm() {
-            document.getElementById('player-name').value = '';
-            document.getElementById('player-address').value = '';
-            document.getElementById('player-age').value = '';
-            document.getElementById('player-position').value = '';
-            document.getElementById('player-email').value = '';
-            document.getElementById('player-phone').value = '';
-            document.getElementById('player-jersey-number').value = '';
-            document.getElementById('player-id-number').value = '';
-        }
+    if (isNaN(age) || age < 10 || age > 40) {
+        alert('Please enter a valid age (between 10 and 40 yeas).');
+        return false;
+    }
 
-        function editPlayer(playerName) {
-            const player = players.find(p => p.name === playerName);
-            if (player) {
-                document.getElementById('player-name').value = player.name;
-                document.getElementById('player-address').value = player.address;
-                document.getElementById('player-age').value = player.age;
-                document.getElementById('player-position').value = player.position;
-                document.getElementById('player-email').value = player.email;
-                document.getElementById('player-phone').value = player.phone;
-                document.getElementById('player-jersey-number').value = player.jerseyNumber;
-                document.getElementById('player-id-number').value = player.idNumber;
-            }
-        }
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
 
-        function removePlayer(playerName) {
-            const playerIndex = players.findIndex(p => p.name === playerName);
-            if (playerIndex > -1) {
-                players.splice(playerIndex, 1);
-                updatePlayerList();
-            }
-        }
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid phone number (10 digits).');
+        return false;
+    }
+
+    return true;
+    // Validate ID number format (13 digits)
+    if (!idPattern.test(idNumber)) {
+        alert('Please enter a valid ID number (13 digits).');
+        return false;
+    }
+
+    return true; // All validations passed
+}
+
+function updatePlayerList() {
+    const playersContainer = document.getElementById('players-container');
+    playersContainer.innerHTML = '';
+
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.fontSize = '0.6em'; // Set font size to be smaller
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px;">Player Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Address</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Age</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Position</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Phone</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Jersey No</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">ID Number</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="players-list">
+        </tbody>
+    `;
+    playersContainer.appendChild(table);
+
+    const playersList = document.getElementById('players-list');
+    playersList.innerHTML = ''; // Clear existing rows before adding new ones
+    players.forEach(player => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.name}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.address}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.age}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.position}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.email}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.phone}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.jerseyNumber}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">${player.idNumber}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+                <button onclick="editPlayer('${player.name}')" style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;" title="Edit Player">Edit</button>
+                <button onclick="removePlayer('${player.name}')" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;" title="Remove Player">Remove</button>
+            </td>
+        `;
+        playersList.appendChild(row);
+    });
+}
+
+function clearPlayerForm() {
+    document.getElementById('player-name').value = '';
+    document.getElementById('player-address').value = '';
+    document.getElementById('player-age').value = '';
+    document.getElementById('player-position').value = '';
+    document.getElementById('player-email').value = '';
+    document.getElementById('player-phone').value = '';
+    document.getElementById('player-jersey-number').value = '';
+    document.getElementById('player-id-number').value = '';
+}
+
+function editPlayer(playerName) {
+    const player = players.find(p => p.name === playerName);
+    if (player) {
+        document.getElementById('player-name').value = player.name;
+        document.getElementById('player-address').value = player.address;
+        document.getElementById('player-age').value = player.age;
+        document.getElementById('player-position').value = player.position;
+        document.getElementById('player-email').value = player.email;
+        document.getElementById('player-phone').value = player.phone;
+        document.getElementById('player-jersey-number').value = player.jerseyNumber;
+        document.getElementById('player-id-number').value = player.idNumber;
+    }
+}
+
+function removePlayer(playerName) {
+    const playerIndex = players.findIndex(p => p.name === playerName);
+    if (playerIndex > -1) {
+        players.splice(playerIndex, 1);
+        updatePlayerList();
+    }
+}
+
     </script>
 
 
